@@ -1,8 +1,8 @@
 from rest_framework import serializers
-from .models import Profile,Category,Product
+from .models import Profile,Category,Product,User
 
 class ProfileSerializer(serializers.Serializer):
-    user = serializers.CharField(source='user.username')
+    user = serializers.SlugRelatedField(queryset=User.objects.all(),slug_field='username')
     date_of_birth = serializers.DateField()
     phonenumber = serializers.CharField(max_length=12)
     picture = serializers.ImageField(allow_null=True,required=False)
