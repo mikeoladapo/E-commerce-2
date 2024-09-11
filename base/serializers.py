@@ -1,8 +1,9 @@
 from rest_framework import serializers
-from .models import Profile,Category,Product,User
+from .models import Profile,Category,Product
 
 class ProfileSerializer(serializers.Serializer):
-    user = serializers.SlugRelatedField(queryset=User.objects.all(),slug_field='username')
+    user = serializers.SlugRelatedField(queryset=Profile.objects.all(),slug_field='username')
+    #user = serializers.PrimaryKeyRelatedField(queryset=Profile.objects.all())
     date_of_birth = serializers.DateField()
     phonenumber = serializers.CharField(max_length=12)
     picture = serializers.ImageField(allow_null=True,required=False)
@@ -31,7 +32,8 @@ class ProductSerializer(serializers.Serializer):
     name = serializers.CharField(max_length = 20)
     price = serializers.DecimalField(max_digits=10,decimal_places=2)
     about = serializers.CharField(max_length = 50)
-    category = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all())
+    #category = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all())
+    category = serializers.SlugRelatedField(queryset=Category.objects.all(),slug_field="name")
     picture = serializers.ImageField(allow_null=True,required=False)
 
     def create(self, validated_data):

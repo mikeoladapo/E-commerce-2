@@ -90,7 +90,7 @@ class ProductList(APIView):
         serializer = ProductSerializer(products,many=True)
         return Response(serializer.data)
     def post(self,request):
-        serializer = ProductSerializer(data=request.data,many=True)
+        serializer = ProductSerializer(data=request.data,many=False)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data,status= status.HTTP_201_CREATED)
