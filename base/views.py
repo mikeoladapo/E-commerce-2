@@ -19,7 +19,7 @@ class ProfileList(APIView):
 class ProfileDetail(APIView):
     def get(self,request,pk):
         try:
-            profile = Profile.objects.get(pk)
+            profile = Profile.objects.get(pk=pk)
             serializer = ProfileSerializer(profile)
             return Response(serializer.data)
         except Profile.DoesNotExist:
@@ -27,7 +27,7 @@ class ProfileDetail(APIView):
         
     def put(self,request,pk):
         try:
-            profile = Profile.objects.get(pk)
+            profile = Profile.objects.get(pk=pk)
             serializer = ProfileSerializer(profile,data=request.data)
             if serializer.is_valid():
                 serializer.save()
@@ -38,7 +38,7 @@ class ProfileDetail(APIView):
 
     def delete(self,request,pk):
         try:
-            profile = Profile.objects.get(pk)
+            profile = Profile.objects.get(pk=pk)
             profile.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         except Profile.DoesNotExist:
@@ -61,14 +61,14 @@ class CategoryList(APIView):
 class CategoryDetail(APIView):
     def get(self,request,pk):
         try:
-            category = Category.objects.get(pk)
+            category = Category.objects.get(pk=pk)
             serializer = CategorySerializer(category)
             return Response(serializer.data)
         except Category.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
     def put(self,request,pk):
         try:
-            category = Category.objects.get(pk)
+            category = Category.objects.get(pk=pk)
             serializer = CategorySerializer(category,data=request.data)
             if serializer.is_valid():
                 serializer.save()
@@ -78,7 +78,7 @@ class CategoryDetail(APIView):
             return Response(status=status.HTTP_404_NOT_FOUND)
     def delete(self,request,pk):
         try:
-            category = Category.objects.get(pk)
+            category = Category.objects.get(pk=pk)
             category.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         except Category.DoesNotExist:
@@ -99,14 +99,14 @@ class ProductList(APIView):
 class ProductDetail(APIView):
     def get(self,request,pk):
         try:
-            product = Product.objects.get(pk)
+            product = Product.objects.get(pk=pk)
             serializer = ProductSerializer(product)
             return Response(serializer.data)
         except Product.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
     def put(self,request,pk):
         try:
-            product = Product.objects.get(pk)
+            product = Product.objects.get(pk=pk)
             serializer = ProductSerializer(product,data=request.data)
             if serializer.is_valid():
                 serializer.save()
@@ -116,7 +116,7 @@ class ProductDetail(APIView):
             return Response(status=status.HTTP_404_NOT_FOUND)
     def delete(self,request,pk):
         try:
-            product = Product.objects.get(pk)
+            product = Product.objects.get(pk=pk)
             product.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         except Product.DoesNotExist:
